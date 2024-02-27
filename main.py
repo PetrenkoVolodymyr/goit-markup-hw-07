@@ -41,7 +41,7 @@ def change_contact(args, book:AddressBook):
 
 @input_error 
 def show_all(args, book:AddressBook):
-    return book.all_contacts()
+    return book
 
 
 @input_error
@@ -50,12 +50,19 @@ def get_contact(args, book:AddressBook):
     record = book.find(name)
     return record.phone_list()
 
+@input_error
+def del_contact(args, book:AddressBook):
+    name, phone = args
+    record = book.find(name)
+    record.remove_phone(phone)
+    return 'Phone deleted'
+
 
 @input_error
 def get_birthday(args, book:AddressBook):
     name = args[0]
     record = book.find(name)
-    return record.birthday_date()
+    return record.birthday
 
 
 @input_error
@@ -94,6 +101,8 @@ def main():
             print(show_all(args, book))
         elif command == "phone":
             print(get_contact(args, book))
+        elif command == "delete":
+            print(del_contact(args, book))
         elif command == "add-birthday":
             print(add_birthday(args, book))
         elif command == "show-birthday":

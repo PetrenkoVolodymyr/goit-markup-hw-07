@@ -72,9 +72,6 @@ class Record:
         for i in self.phones:
             phone_items = phone_items + f'{i}, '
         return phone_items.rstrip(', ')
-    
-    def birthday_date(self):
-        return self.birthday.value
 
         
     def __str__(self):
@@ -82,6 +79,7 @@ class Record:
     
 
 class AddressBook(UserDict):
+
     def add_record(self, record):
         self.data[record.name.value] = record
 
@@ -90,7 +88,7 @@ class AddressBook(UserDict):
         return self.data.get(name)
 
 
-    def all_contacts(self):
+    def __str__(self):
         contacts = ''
 
         for el in self.data:
